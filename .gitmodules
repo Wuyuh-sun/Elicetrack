@@ -1,0 +1,6 @@
+[submodule "sw/1"]
+	path = sw/1
+	url = https://kdt-gitlab.elice.io/sw_track/class_05/lecture-material/1.git
+[submodule "sw/therory"]
+	path = sw/therory
+	url = https://kdt-gitlab.elice.io/sw_track/class_05/lecture-material/therory.git
