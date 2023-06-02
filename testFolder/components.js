@@ -10,7 +10,7 @@ const arrayFunctions = {
 
     for (let i = 0; i <= array.length - 1; i++) {
       const result = func(array[i]);
-      result ? newArray.push(result) : newArray.push(array[i]);
+      newArray[i] = result;
     }
 
     return newArray;
