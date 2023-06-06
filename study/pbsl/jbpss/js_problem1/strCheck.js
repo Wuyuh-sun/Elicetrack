@@ -22,7 +22,8 @@
  * 1 5 2
  */
 
-const readline = require("readline");
+// const readline = require("readline");
+import readline from "readline";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -53,7 +54,6 @@ rl.on("line", function (x) {
   const [N, S] = data;
   const S_split = S.split("");
   S_split.map((item) => {
-    
     switch (true) {
       case !isNaN(item): // 숫자일때
         S_cnt[2]++;
