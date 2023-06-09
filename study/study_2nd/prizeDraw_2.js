@@ -1,11 +1,3 @@
-/**
- * 
- * @param {string} st 사람 이름이 들어가있는 문자열
- * @param {number[]} we 가충치
- * @param {number} n 순위
- * @returns 
- */
-
 function rank(st, we, n) {
   if (st.length === 0) return "No participants";
   if (we.length < n) return "Not enough participants";
@@ -23,14 +15,40 @@ function rank(st, we, n) {
       winningNum,
     };
   });
-  const sort = splitMap.sort((a, b) =>
-    a.winningNum !== b.winningNum
-      ? b.winningNum - a.winningNum
-      : a.name.localeCompare(b.name)
-  );
+  const sort = sortArray(splitMap);
 
   return sort[n - 1].name;
 }
+
+function sortArray(arr) {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const pivotIndex = Math.floor(arr.length / 2);
+  const pivot = arr[pivotIndex].winningNum;
+
+  const left = [];
+  const equal = [];
+  const right = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    const current = arr[i];
+
+    if (current.winningNum > pivot) {
+      left.push(current);
+    } else if (current.winningNum < pivot) {
+      right.push(current);
+    } else {
+      equal.push(current);
+    }
+  }
+
+  return sortArray(left)
+    .concat(equal.sort((a, b) => a.name.localeCompare(b.name)))
+    .concat(sortArray(right));
+}
+
 function getAlphabetOrder(char) {
   const uppercaseChar = char.toUpperCase();
   const charCode = uppercaseChar.charCodeAt(0);
