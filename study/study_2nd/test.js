@@ -1,1 +1,1 @@
-console.log("AB".charCodeAt(0));
+console.log("asd" < "as");

@@ -70,7 +70,6 @@ function rank(st, we, n) {
 
   // winning number를 기준으로 내림차순 정렬
   // 두 사람이상이 같은 번호를 가지고 있을 경우 알파벳 순으로 정렬
-  console.log(splitMap);
   const sort = sortArray(splitMap);
 
   return sort[n - 1].name; // n이 1부터 순위를 매기므로 -1을 한 인덱스를 찾아서 이름을 반환
