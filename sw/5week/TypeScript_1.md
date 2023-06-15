@@ -9,20 +9,20 @@
 
 <span class="hljs-keyword">let</span> <span class="hljs-attr">p2</span>:<span class="hljs-title class_">Human</span> = {<span class="hljs-attr">name</span>: <span class="hljs-string">"cheshire"</span>, <span class="hljs-attr">age</span>:<span class="hljs-number">15</span>};
 </code></pre><p>여기서 <code>name</code>과 <code>age</code>를 프로퍼티라고 합니다. 이러한 타입은 뒤에서 배울 인터페이스와 유사한데, 뒤에서 더 자세히 학습할 예정입니다.</p><p>그래서 유틸리티 타입이란 이미 정의해 놓은 타입을 변환하고 싶을 때 사용하면 좋은 타입입니다. 유틸리티 타입을 이용하면 기존의 타입을 이용해 새로운 타입을 만들 수 있습니다. (마찬가지로 인터페이스에도 유틸리티 타입을 적용할 수 있습니다.)</p><p>유틸리티 타입에서 사용되는 <code>&lt;T&gt;</code>와 같은 꺾쇠 형태는 뒤에서 배울 제네릭(Generic)의 문법입니다. 제네릭이란 어떤 함수나 클래스가 사용할 타입을 생성 단계가 아닌 사용 단계에서 정의하는 프로그래밍 기법입니다. 제너릭은 뒤에서 더 자세히 다룰 예정입니다. 이번 장에서는 제네릭을 이용해 정의된 타입을 쉽게 변경할 수 있도록 도와주는 유틸리티 타입들에 무엇이 있는지를 학습해보시기를 바랍니다. (강의자료에 있는 코드를 한 번씩 실행해보면서 익히기를 권장합니다.)</p><ul><li><code>Partial&lt;T&gt;</code> : T의 프로퍼티를 선택적으로 구성할 수 있습니다.</li><li><code>Readonly&lt;T&gt;</code> : T의 프로퍼티를 읽기 전용으로 설정하여, 값을 재할당하는 경우 에러가 발생합니다.</li><li><code>Record&lt;K, T&gt;</code> : 프로퍼티 키를 K, 값을 T로 하는 타입을 만들 수 있습니다.<ul><li>여러 키들을 지정하기 위해 타입을 선언한 방식(<code>type&nbsp;Page&nbsp;=&nbsp;'home'&nbsp;|&nbsp;'about'&nbsp;|&nbsp;'contact';</code>)처럼 두 개 이상의 타입을 선언하는 방식을 유니온 타입이라고 합니다.</li></ul></li><li><code>Pick&lt;T, K&gt;</code> : T 타입 중에서 K 프로퍼티만 지정하여 타입을 만들 수 있습니다.</li><li><code>Omit&lt;T, K&gt;</code> : T 타입의 모든 프로퍼티 중 K를 제거하여 타입을 구성합니다.</li><li><code>Exclude&lt;T, U&gt;</code> : 타입 T에서 U와 겹치는 타입을 제외한 타입을 구성합니다.</li><li><code>Extract&lt;T, U&gt;</code> : 타입 T에서 U와 겹치는 타입만 포함하여 타입을 구성합니다.</li><li><code>NonNllable&lt;T&gt;</code> : T 타입에서 null과 undefined를 제외한 타입을 구성합니다.</li><li><code>Parameter&lt;T&gt;</code> : 함수 타입 T의 매개변수의 타입들의 튜플로 타입을 구성합니다.</li><li><code>ConstructorParameters&lt;T&gt;</code> : 클래스의 생성자를 비롯한 생성자 타입의 모든 매개변수 타입을 추출합니다.</li><li><code>ReturnType&lt;T&gt;</code> : 함수 T가 반환한 타입으로 타입을 구성합니다.</li><li><code>Required&lt;T&gt;</code> : 타입 T의 모든 프로퍼티가 필수로 설정된 타입을 구성합니다.</li></ul><h3 id="4-typescript를-이용해-함수-사용하기">4. TypeScript를 이용해 함수 사용하기</h3><p><strong>매개변수와 인수</strong></p><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">x, y</span>) {
-    <span class="hljs-keyword">return</span> x + y;
+<span class="hljs-keyword">return</span> x + y;
 }
 <span class="hljs-title function_">add</span>(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>);
 </code></pre><ul><li>매개변수 : 함수를 정의할 때 사용되는 변수를 매개변수라고 합니다. (<code>x</code>, <code>y</code>)</li><li>인수 : 함수를 호출할 때 사용되는 값을 인수라고 합니다. (<code>2</code>, <code>5</code>)</li><li>인자 값, 매개변수, 파라미터(Parameter)는 모두 같은 말입니다.</li></ul><p><strong>일급 객체</strong></p><ul><li>다른 객체들에 일반적으로 적용 가능한 연산을 모두 지원하는 객체를 일급 객체라고 합니다.</li><li>자바스크립트의 함수는 다른 함수에 매개변수로 제공할 수 있습니다.</li></ul><pre><code class="hljs"><span class="hljs-keyword">let</span> elice = <span class="hljs-keyword">function</span>(<span class="hljs-params">func</span>) {
-   <span class="hljs-title function_">func</span>();
+<span class="hljs-title function_">func</span>();
 }
 
 <span class="hljs-title function_">elice</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
-   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'coding'</span>); <span class="hljs-comment">// "coding"</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'coding'</span>); <span class="hljs-comment">// "coding"</span>
 });
 </code></pre><ul><li>자바스크립트의 함수는 함수에서 반환이 가능합니다.</li></ul><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">elice</span>(<span class="hljs-params"></span>) {
-   <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
-       <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'coding'</span>); <span class="hljs-comment">// "coding"</span>
-   }
+<span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'coding'</span>); <span class="hljs-comment">// "coding"</span>
+}
 }
 
 <span class="hljs-keyword">let</span> test = <span class="hljs-title function_">elice</span>();
@@ -30,7 +30,9 @@
 </code></pre><ul><li>자바스크립트의 함수는 변수에 할당이 가능합니다.</li></ul><pre><code class="hljs"><span class="hljs-keyword">let</span> elice = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) { <span class="hljs-keyword">return</span> <span class="hljs-string">"coding"</span>; };
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">elice</span>()); <span class="hljs-comment">// "coding"</span>
 </code></pre><ul><li>따라서 자바스크립트의 함수는 일급 객체이고, 타입스크립트도 동일합니다. 이러한 타입스크립트 함수의 특성 때문에 함수를 선언하는 5가지 방식이 있습니다.<ul><li>선언 방법 함수 선언식, 함수 표현식, 화살표 함수 표현식, 단축형 화살표 함수 표현식, 함수 생성자 → 각 함수 선언 방식의 차이를 알고 사용하시기를 바랍니다.</li><li>함수 선언식은 <a href="https://developer.mozilla.org/ko/docs/Glossary/Hoisting" target="_blank">호이스팅</a>이 되지만, 함수 표현식은 호이스팅이 되지 않습니다.</li><li>일반 함수는 함수가 호출될 때 this에 바인딩할 객체가 동적으로 정해지지만, 화살표 함수는 함수를 선언할 때 정적으로 정해집니다.</li></ul></li></ul><p><strong>타입스크립트와 함수</strong></p><ul><li>타입스크립트에서 함수를 사용할 때는 매개변수에 타입을 지정하여 올바른 인수가 전달되도록 합니다.</li><li>타입스크립트는 타입 추론이 가능하기 때문에, 함수 사용 시 모든 타입을 일일이 명시하지 않아도 되는 경우도 있습니다.</li></ul><pre><code class="hljs"><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>) {
-    <span class="hljs-keyword">const</span> res = a + b; 
-    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">toString</span>();
+<span class="hljs-keyword">const</span> res = a + b;
+<span class="hljs-keyword">return</span> res.<span class="hljs-title function_">toString</span>();
 }
 </code></pre><ul><li>위의 경우 <code>res</code> 변수는 number, 반환 값은 string이라는 것이 명백하기 때문에 따로 타입을 명시하지 않아도 됩니다. 이는 코드가 짧아지는 이점이 있습니다.</li></ul></p><div class="sc-dlfnuX bJgQKs" style="transition: opacity 300ms ease-in-out 0s; opacity: 0; width: 0px; height: 0px; overflow: hidden;"><div class="sc-bdfBQB DIWNs" role="alert" aria-busy="true" style="margin-bottom: 1rem; width: 10rem; height: 2.25rem; background-size: 100rem 2.25rem; animation-duration: 1.5s, 200ms;"></div><div class="sc-bdfBQB DIWNs" role="alert" aria-busy="true" style="margin-bottom: 0.75rem; width: 70%; height: 1rem; background-size: 700% 1rem; animation-duration: 1.5s, 200ms;"></div><div class="sc-bdfBQB DIWNs" role="alert" aria-busy="true" style="margin-bottom: 0.75rem; width: 60%; height: 1rem; background-size: 600% 1rem; animation-duration: 1.5s, 200ms;"></div><div class="sc-bdfBQB DIWNs" role="alert" aria-busy="true" style="margin-bottom: 0rem; width: 50%; height: 1rem; background-size: 500% 1rem; animation-duration: 1.5s, 200ms;"></div></div></div>
+
+
