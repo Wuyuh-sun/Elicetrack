@@ -21,6 +21,29 @@
 
 ![Linear Search](./img/linear.png)
 
+```javascript
+function linearSearch(arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) {
+      return i; // 탐색 성공, 해당 요소의 인덱스 반환
+    }
+  }
+  return -1; // 탐색 실패, -1 반환
+}
+
+// 예시 배열과 탐색 대상
+const array = [4, 2, 9, 5, 1, 7, 6, 3, 8];
+const target = 5;
+
+const result = linearSearch(array, target);
+
+if (result !== -1) {
+  console.log(`탐색 성공! 인덱스 ${result}에서 발견되었습니다.`);
+} else {
+  console.log("탐색 실패! 대상을 찾을 수 없습니다.");
+}
+```
+
 ### 이진 탐색( = 이분 탐색) (Binary Search)
 
 > **정렬된 리스트** 또는 **배열**에서 원하는 요소를 찾기 위해 중간 요소를 비교하고 탐색 범위를 반씩 줄여가는 방법이다.
