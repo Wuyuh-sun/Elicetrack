@@ -104,10 +104,10 @@ class Graph {
     }
   }
 
-  addEdge(source, destination) {
+  addEdge(vertex, adjVertex) {
     // 간선 추가
-    this.adjMatrix[source][destination] = 1;
-    this.adjMatrix[destination][source] = 1;
+    this.adjMatrix[vertex][adjVertex] = 1;
+    this.adjMatrix[adjVertex][vertex] = 1;
   }
 
   printGraph() {
@@ -177,16 +177,16 @@ class Graph {
     this.adjList = new Map();
   }
 
-  addEdge(source, destination) {
+  addEdge(vertex, adjVertex) {
     // 간선 추가
-    if (!this.adjList.has(source)) {
-      this.adjList.set(source, []);
+    if (!this.adjList.has(vertex)) {
+      this.adjList.set(vertex, []);
     }
-    if (!this.adjList.has(destination)) {
-      this.adjList.set(destination, []);
+    if (!this.adjList.has(adjVertex)) {
+      this.adjList.set(adjVertex, []);
     }
-    this.adjList.get(source).push(destination);
-    this.adjList.get(destination).push(source);
+    this.adjList.get(vertex).push(adjVertex);
+    this.adjList.get(adjVertex).push(vertex);
   }
 
   printGraph() {
@@ -214,9 +214,97 @@ graph.addEdge(3, 4);
 graph.printGraph();
 
 // 결과
-0 -> 1 4 
+0 -> 1 4
 1 -> 0 2 3 4
 4 -> 0 1 3
 2 -> 1
 3 -> 1 4
 ```
+
+---
+
+## 그래프 탐색 기법
+
+### 너비 우선 탐색 (BFS)
+
+### 깊이 우선 탐색 (DFS)
+
+### 다익스트라 (Dijkstra)
+
+> 출발 정점에서 다른 모든 정점까지의 최단 거리를 구하는 알고리즘
+
+> 주로 가중치가 양수인 그래프에서 사용됨
+
+#### 예시 그래프
+
+![dijkstra](./img/dijkstra.png)
+
+#### 코드예시
+
+```javascript
+const graph = {
+  A: { B: 5, C: 2 },
+  B: { A: 5, D: 1 },
+  C: { A: 2, D: 6 },
+  D: { B: 1, C: 6, E: 4 },
+  E: { D: 4 },
+};
+
+const startVertex = "A";
+
+const distances = dijkstra(graph, startVertex);
+
+function dijkstra(graph, start) {
+  const distances = {}; // 각 정점까지의 최단 거리를 저장할 객체
+  const visited = {}; // 방문한 정점을 표시하는 객체
+  const queue = []; // 우선순위 큐
+
+  // 초기화
+  for (let vertex in graph) {
+    distances[vertex] = Infinity; // 모든 정점까지의 거리를 무한대로 설정
+    visited[vertex] = false; // 모든 정점을 방문하지 않은 상태로 초기화
+  }
+
+  distances[start] = 0; // 시작 정점의 거리를 0으로 설정
+  queue.push({ vertex: start, distance: 0 }); // 시작 정점을 큐에 삽입
+
+  while (queue.length > 0) {
+    // 큐가 비어있을 때까지 반복
+    queue.sort((a, b) => a.distance - b.distance); // 거리가 짧은 순서대로 정렬
+
+    const { vertex, distance } = queue.shift(); // 가장 거리가 짧은 정점을 꺼냄
+
+    if (visited[vertex]) {
+      // 이미 방문한 정점이면 스킵
+      continue;
+    }
+
+    visited[vertex] = true; // 정점 방문 처리
+
+    for (let neighbor in graph[vertex]) {
+      const newDistance = distance + graph[vertex][neighbor];
+
+      if (newDistance < distances[neighbor]) {
+        // 더 짧은 거리를 발견한 경우
+        distances[neighbor] = newDistance; // 최단 거리 갱신
+        queue.push({ vertex: neighbor, distance: newDistance }); // 큐에 삽입
+      }
+    }
+  }
+
+  return distances;
+}
+
+console.log(distances);
+
+// 결과
+// {
+//   A: 0,
+//   B: 5,
+//   C: 2,
+//   D: 6,
+//   E: 10
+// }
+```
+
+### 플로이드 와샬( Floyd Washall)

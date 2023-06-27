@@ -6,25 +6,39 @@
 function test1(location, s, e) {
   var answer = [];
 
-  var x = []; // low, high
-  var y = []; // low, high
+  var x = []; // x축 최소, x축 최대
+  var y = []; // y축 최소, y축 최대
 
-  s[0] < e[0] ? ((x[0] = s[0]), (x[1] = e[0])) : ((x[0] = e[0]), (x[1] = s[0]));
-  s[1] < e[1] ? ((y[0] = s[1]), (y[1] = e[1])) : ((y[0] = e[1]), (y[1] = s[1]));
+  // s[0] < e[0] ? ((x[0] = s[0]), (x[1] = e[0])) : ((x[0] = e[0]), (x[1] = s[0]));
+  // s[1] < e[1] ? ((y[0] = s[1]), (y[1] = e[1])) : ((y[0] = e[1]), (y[1] = s[1]));
 
-  // console.log('x',x);
-  // console.log('y',y);
+  if (s[0] < e[0]) {
+    // 점 s의 x가 점e의 x보다 작을 때
+    x[0] = s[0]; // x축의 최소 범위 = 점s의 x
+    x[1] = e[0]; // x축의 최대 범위 = 점e의 x
+  } else {
+    // 점 s의 x가 점e의 x보다 클 때
+    x[0] = e[0]; // x축의 최소 범위 = 점e의 x
+    x[1] = s[0]; // x축의 최대 범위 = 점s의 x
+  }
+  if (s[1] < e[1]) {
+    // x축과 같은 로직
+    y[0] = s[1];
+    y[1] = e[1];
+  } else {
+    y[0] = e[1];
+    y[1] = s[1];
+  }
 
   location.map((item, i) => {
-    // console.log('item',item)
+    // 각 점들의 위치 탐색
+
+    // 각 점들의 x축과 y축이 위에서 정한 x축과 y축의 범위안에 속해있을 경우
     item[0] >= x[0] && item[0] <= x[1] && item[1] >= y[0] && item[1] <= y[1]
       ? answer.push(item)
       : false;
-    // item[1] >= y[0] && item[1] <= y[1] ? answer
   });
 
-  // console.log('answer',answer.length)
-  console.log(answer)
   return answer.length;
 }
 console.log("예시 테스트 케이스");

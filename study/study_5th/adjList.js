@@ -4,16 +4,16 @@ class Graph {
     this.adjList = new Map();
   }
 
-  addEdge(source, destination) {
+  addEdge(vertex, adjVertex) {
     // 간선 추가
-    if (!this.adjList.has(source)) {
-      this.adjList.set(source, []);
+    if (!this.adjList.has(vertex)) {
+      this.adjList.set(vertex, []);
     }
-    if (!this.adjList.has(destination)) {
-      this.adjList.set(destination, []);
+    if (!this.adjList.has(adjVertex)) {
+      this.adjList.set(adjVertex, []);
     }
-    this.adjList.get(source).push(destination);
-    this.adjList.get(destination).push(source);
+    this.adjList.get(vertex).push(adjVertex);
+    this.adjList.get(adjVertex).push(vertex);
   }
 
   printGraph() {
