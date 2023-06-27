@@ -24,7 +24,7 @@ function test1(location, s, e) {
   });
 
   // console.log('answer',answer.length)
-
+  console.log(answer)
   return answer.length;
 }
 console.log("예시 테스트 케이스");
