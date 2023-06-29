@@ -2,7 +2,7 @@
 
 ## 그래프란?
 
-> 그래프는 <strong>정점(Vertex)</strong>과 간선으로 이루어진 자료구조
+> 그래프는 <strong>정점(Vertex)</strong>과 **간선**으로 이루어진 자료구조
 
 > <strong>정점(Vertex)</strong>간의 관계를 표현하는 조직도
 
@@ -254,6 +254,17 @@ const startVertex = "A";
 
 const distances = dijkstra(graph, startVertex);
 
+console.log(distances);
+
+// 결과
+// {
+//   A: 0,
+//   B: 5,
+//   C: 2,
+//   D: 6,
+//   E: 10
+// }
+
 function dijkstra(graph, start) {
   const distances = {}; // 각 정점까지의 최단 거리를 저장할 객체
   const visited = {}; // 방문한 정점을 표시하는 객체
@@ -294,17 +305,6 @@ function dijkstra(graph, start) {
 
   return distances;
 }
-
-console.log(distances);
-
-// 결과
-// {
-//   A: 0,
-//   B: 5,
-//   C: 2,
-//   D: 6,
-//   E: 10
-// }
 ```
 
 ### 플로이드 와샬( Floyd Washall)
