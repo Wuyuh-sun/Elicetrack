@@ -1,5 +1,6 @@
 import { Button, Container, Grid } from '@mui/material';
 import React, { useState } from 'react';
+import Test from './components/Test';
 type counterProps = {
   title: string,
   initValue: number
@@ -25,22 +26,27 @@ function Counter({ title, initValue }: counterProps) {
 
 function App() {
   return (
-    <Container maxWidth="md">
-      <Grid container spacing={1}>
-        <Grid item xs={24} sm={6} md={4}>
-          <Counter title="카운터" initValue={0} />
+    <>
+
+      <Container maxWidth="md">
+        <Grid container spacing={1}>
+          <Grid item xs={24} sm={6} md={4}>
+            <Counter title="카운터" initValue={0} />
+          </Grid>
+          <Grid item xs={24} sm={6} md={4}>
+            <Counter title="Counter" initValue={10} />
+          </Grid>
+          <Grid item xs={24} sm={6} md={4}>
+            <Counter title="불면증 카운터" initValue={20} />
+          </Grid>
+          <Grid item xs={24} sm={6} md={4}>
+            <Counter title={"undefined"} initValue={0} />
+          </Grid>
         </Grid>
-        <Grid item xs={24} sm={6} md={4}>
-          <Counter title="Counter" initValue={10} />
-        </Grid>
-        <Grid item xs={24} sm={6} md={4}>
-          <Counter title="불면증 카운터" initValue={20} />
-        </Grid>
-        <Grid item xs={24} sm={6} md={4}>
-          <Counter title={"undefined"} initValue={0} />
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+      <Test />
+    </>
+
   );
 }
 
