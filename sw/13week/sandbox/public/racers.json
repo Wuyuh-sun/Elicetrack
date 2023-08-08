@@ -1,0 +1,26 @@
+[
+  {
+    "racerId": "a",
+    "userName": "김수연",
+    "email": "songudeum@gmail.com",
+    "profileImage": "/images/suyeon.png"
+  },
+  {
+    "racerId": "b",
+    "userName": "이다혜",
+    "email": "leejoys.lab@gmail.com",
+    "profileImage": "/images/dahye.png"
+  },
+  {
+    "racerId": "c",
+    "userName": "송서현",
+    "email": "seohyunsong03@gamil.com",
+    "profileImage": "/images/seohyeon.png"
+  },
+  {
+    "racerId": "faker",
+    "userName": "이상혁",
+    "email": "t1faker@naver.com",
+    "profileImage": "/images/sanghyuk.png"
+  }
+]

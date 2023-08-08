@@ -1,0 +1,30 @@
+[
+  {
+    "racerId": "a",
+    "userName": "김수연",
+    "email": "songudeum@gmail.com",
+    "profileImage": "/images/suyeon.png",
+    "bio": "안녕하세요! 말하는 감자입니다"
+  },
+  {
+    "racerId": "b",
+    "userName": "이다혜",
+    "email": "leejoys.lab@gmail.com",
+    "profileImage": "/images/dahye.png",
+    "bio": "안녕하세요! 힐링은 푸바오와 함께!"
+  },
+  {
+    "racerId": "c",
+    "userName": "송서현",
+    "email": "seohyunsong03@gamil.com",
+    "profileImage": "/images/seohyeon.png",
+    "bio": "안녕하세요! 성장 진행형 개발자 송서현입니다."
+  },
+  {
+    "racerId": "faker",
+    "userName": "이상혁",
+    "email": "t1faker@naver.com",
+    "profileImage": "/images/sanghyuk.png",
+    "bio": "안녕하세요! 롤보다 개발이 재밌습니다!"
+  }
+]
